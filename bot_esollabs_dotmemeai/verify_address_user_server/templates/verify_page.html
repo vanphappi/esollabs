@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Verify Page</title>
+</head>
+<body>
+    <button id="verify_button">Verify</button>
+
+    <script type="module">
+        //import { ethers } from 'ethers';
+        import { ethers } from "https://cdn-cors.ethers.io/lib/ethers-5.5.4.esm.min.js";        
+
+        document.getElementById("verify_button").onclick = function() {verify()};
+        
+        async function verify() {
+            var token = "6533497382:AAHgC61oPsAuMVKwcbVLDDjq3SLBxkcAikg"; // Fill this in with your token
+            var telegramUrl = "https://api.telegram.org/bot" + token;
+            var address;
+
+            if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
+                try {
+                    /* MetaMask is installed */
+                    const accounts = await window.ethereum.request({
+                        method: "eth_requestAccounts",
+                    });
+                    address = accounts[0];
+                } catch (err) {
+                    console.error(err.message);
+                }
+            } else {
+                /* MetaMask is not installed */
+                alert("Please install MetaMask");
+                window.location.href = 'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?utm_source=ext_app_menu'
+            }
+
+            address = "0x5d12ffaf4ab3d70b5c3941dd6a29fc6fc4415eb4"
+
+            const curl = window.location.href
+            console.log(curl)
+            
+            fetch(`${curl}/address=${address}`).then(response => response.text()).then(result => { 
+                if(result == "0"){
+                    var text= "Your account does not own any NFTs DNS meme please buy a domain at dotmeme.ai to join the community"
+                    alert(text)
+                    window.location.href = 'https://dotmeme.ai/'
+                }
+                
+                if(result == "1"){
+                    //Verify if telegram
+                    fetch(`${curl}/telegram/address=${address}`).then(response => response.text()).then(result => { 
+                        if(result != "0"){
+                            var id = result
+                            var text = "You have successfully verified"
+
+                            fetch(`https://api.telegram.org/bot6533497382:AAHgC61oPsAuMVKwcbVLDDjq3SLBxkcAikg/createChatInviteLink?chat_id=-1001973873960&member_limit=1`).then(response => response.json()).then(json => { 
+                                var invite_link = json.result.invite_link.toString()
+
+                                //Send link invate user to telegram channel
+                                fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${id}&text=${text}`).then(response => response.json()).then(json => { 
+                                    alert(text)
+                                    window.location.href = invite_link;
+                                });
+
+                            });
+
+                            
+                        }
+                    });
+
+
+                    //Verify if discord
+                    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${id}&text=${text}`).then(response => response.json()).then(json => { 
+                        alert(text)
+                        window.location.href = invite_link;
+                    });
+
+
+                    
+                }
+            });
+
+        }
+    </script>
+</body>
+</html>
