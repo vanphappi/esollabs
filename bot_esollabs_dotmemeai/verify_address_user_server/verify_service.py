@@ -96,7 +96,7 @@ def create_link_verify(id):
     token_create_time[str(token)] = str(datetime.now())
     token_verify[str(token)] = str(id)
 
-    return f"http://127.0.0.1:5000/dotmeme.ai/verify/token={token}"
+    return f"http://62.72.44.94:8080/dotmeme.ai/verify/token={token}"
 
 if __name__ == '__main__':
     from waitress import serve
