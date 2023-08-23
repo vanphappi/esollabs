@@ -99,4 +99,6 @@ def create_link_verify(id):
     return f"http://127.0.0.1:5000/dotmeme.ai/verify/token={token}"
 
 if __name__ == '__main__':
-   app.run(debug = True)
+    from waitress import serve
+    serve(app, host="0.0.0.0", port=8080)
+    app.run(debug = True)
