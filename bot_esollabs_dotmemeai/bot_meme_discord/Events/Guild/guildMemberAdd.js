@@ -25,7 +25,7 @@ module.exports = {
     //Verify account
     
     
-    member.roles.add('1139030838303010906');
+    //member.roles.add('1139030838303010906');
     memberLogs.send({embeds: [welcomeEmbed]});
     console.log(`${member.id} joined the guild.`)
   },

