@@ -17,7 +17,7 @@ const {
      */
 
   
-    execute(interaction,member) {
+    execute(interaction) {
       
       interaction.reply({content: "Pong", ephermal: true});
     },

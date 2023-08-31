@@ -1,0 +1,17 @@
+.idea
+*.pyc
+test
+.env
+.vscode
+.venv
+install
+venv
+lib
+.python-version
+__pycache__
+
+test.py
+__pycache__
+test_ok.json
+test/
+library/

@@ -5,6 +5,7 @@ import string
 import random
 import hashlib
 from datetime import datetime
+from waitress import serve
 
 app = Flask(__name__)
 
@@ -99,6 +100,6 @@ def create_link_verify(id):
     return f"http://62.72.44.94:8080/dotmeme.ai/verify/token={token}"
 
 if __name__ == '__main__':
-    from waitress import serve
+    
     serve(app, host="0.0.0.0", port=8080)
     app.run(debug = True)
